@@ -21,6 +21,7 @@ body {
     height: 56vmin;
     object-fit: cover;
     object-position: center;
-    
+    user-select: none;    /* make images not able to select */
+    pointer-events: none;    /* ^^ */
     display: inline-block;    /* display images in a line */
 }
