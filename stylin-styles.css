@@ -10,6 +10,7 @@ body {
     display: flex;
     gap: 4vmin;
     position: absolute; left: 50%; top: 50%; transform: translate(0%, -50%);
+    width: max-content;
     /* overflow-x: scroll;
     white-space: nowrap;
     height: 60vmin; */
