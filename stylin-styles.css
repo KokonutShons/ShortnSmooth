@@ -6,15 +6,20 @@ body {
     overflow: hidden;    /* no scroll bars */
 }
 
+#image-track {
+    display: flex;
+    gap: 4vmin;
+    position: absolute; left: 50%; top: 50%; transform: translate(0%, -50%);
+    /* overflow-x: scroll;
+    white-space: nowrap;
+    height: 60vmin; */
+}
+
 #image-track > .image {
     width: 40vmin;
     height: 56vmin;
     object-fit: cover;
     object-position: center;
-}
-
-#image-track {
-    display: flex;
-    gap: 4vmin;
-    position: absolute; left: 50%; top: 50%; transform: translate(0%, -50%);
+    
+    display: inline-block;    /* display images in a line */
 }
