@@ -5,9 +5,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let isMouseDown = false;
 
+    const imageSwitchButton = document.getElementById("imageSwitchButton");
+    const imageTrack = document.getElementById("image-track");
+
     window.onmousedown = e => {
         isMouseDown = true;
         track.dataset.mouseDownAt = e.clientX;
+        sharedPercentage = nextPercentage;    // update shared percentage for dragging and wheel
     }
 
     window.onmouseup = () => {
@@ -20,16 +24,18 @@ document.addEventListener("DOMContentLoaded", function () {
     window.onmousemove = e => {
         if (!isMouseDown) return;
         let mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX; 
-            const maxDelta = window.innerWidth / 2;
+        const maxDelta = window.innerWidth / 2;
 
         let percentage = (mouseDelta / maxDelta) * -100;    /* multiply by -100 instead of 100 to scroll the right way */
         if (isNaN(percentage)) {
             return;    // avoid NaN values
         }
-            nextPercentage = parseFloat(track.dataset.prevPercentage) + percentage;
+        nextPercentage = parseFloat(track.dataset.prevPercentage) + percentage;
 
-        Math.min(nextPercentage, 0);    /* set minimum and maximum of page scrolling */
-        Math.max(nextPercentage, -100);
+        nextPercentage = Math.min(nextPercentage, 0);    /* set minimum and maximum of page scrolling */
+        nextPercentage = Math.max(nextPercentage, -100);
+
+        sharedPercentage = nextPercentage;    // upadte shared percentage for consistency
 
         track.dataset.percentage = nextPercentage;
 
@@ -37,35 +43,58 @@ document.addEventListener("DOMContentLoaded", function () {
         // set duration and fill to 'forward' so the animation stays consistent and does not reset to default
         track.animate({
             transform: `translate(${nextPercentage}%, -50%)`
-        }, { duration: 1200, fill: "forwards" });
+        }, { duration: 3600, fill: "forwards" });
 
         for (const image of track.getElementsByClassName("image")) {
             // image.style.objectPosition = `${nextPercent + 100} 50%`;    /* add 100 to horizontal orientation to emulate -100 to 0 and 0 to 100 */
             image.animate({
                 objectPosition: `${100 + nextPercentage}% center`
-            }, { duration: 1200, fill: "forwards" });
+            }, { duration: 3600, fill: "forwards" });
         }
     }
 
-    // Add an event listener for more intuitive scrolling
-    window.addEventListener("wheel", e => {
-        const scrollAmount = e.deltaY;
-        // Adjust scroll direction and percentage
-        if (scrollAmount > 0) {    // scroll percentages are inverted (negative and positive are flipped)
-            sharedPercentage += 1;    // scrolling down moves to right
-        } else {
-            sharedPercentage -= 1;    // scrolling up moves to left
-        }
-        Math.min(0, Math.max(-100, sharedPercentage));
-        track.dataset.percentage = sharedPercentage;
-        track.animate({    // update CSS within animation
-            transform: `translate(${sharedPercentage}%, -50%)`
-        }, { duration: 1200, fill: "forwards" });
-        // same way of updating images as dragging mouse
-        for (const image of track.getElementsByClassName("image")) {
-            image.animate({
-                objectPosition: `${100 + sharedPercentage}% center`
-            }, { duration: 1200, fill: "forwards" });
+    // not allowing wheel scrolling
+
+    // Image switching stuff
+    const initialImageSources = [
+        "images/colorful-sunset.jpg",
+        "images/ambient-beach.jpg",
+        "images/kourin.jpg",
+        "images/overhang-waterfall.jpg",
+        "images/light-city.jpg",
+        "images/ancestral-plane.jpg",
+        "images/purple-sky.jpg",
+        "images/galaxies.jpg",
+        "images/starry.jpg",
+        "images/skypink.jpg",
+    ];
+    const alternativeImageSources = [
+        "images/alt/winery.jpg",
+        "images/alt/line.JPG",
+        "images/alt/angel.jpg",
+        "images/alt/kami-higher.jpg",
+        "images/alt/megami.jpg",
+        "images/alt/duality.JPEG",
+        "images/alt/kauai.JPG",
+    ];
+
+    let isInitialImages = true;
+
+    imageSwitchButton.addEventListener("click", () => {
+        if (isInitialImages) {
+            imageTrack.innerHTML = "";     // clear the existing images in the track
+            // add alternative images to the track
+            alternativeImageSources.forEach((source, index) => {
+                const img = document.createElement("img");
+                img.src = source;
+                img.classList.add("image");
+                img.draggable = false;
+                imageTrack.appendChild(img);
+            });
+
+            isInitialImages = false;    // toggle flag
+        } else {    // not initial images
+            window.location.reload();    // reload initial images
         }
     });
 });
