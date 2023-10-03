@@ -25,3 +25,13 @@ body {
     pointer-events: none;    /* ^^ */
     display: inline-block;    /* display images in a line */
 }
+
+.additional #moon {
+    width: 30px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 69px;
+    margin-right: 169px;
+
+}
