@@ -5,9 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let isMouseDown = false;
 
-    const imageSwitchButton = document.getElementById("imageSwitchButton");
-    const imageTrack = document.getElementById("image-track");
-
     window.onmousedown = e => {
         isMouseDown = true;
         track.dataset.mouseDownAt = e.clientX;
@@ -30,6 +27,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (isNaN(percentage)) {
             return;    // avoid NaN values
         }
+        if (isNaN(nextPercentage)) {
+            return;
+        }
         nextPercentage = parseFloat(track.dataset.prevPercentage) + percentage;
 
         nextPercentage = Math.min(nextPercentage, 0);    /* set minimum and maximum of page scrolling */
@@ -47,14 +47,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
         for (const image of track.getElementsByClassName("image")) {
             // image.style.objectPosition = `${nextPercent + 100} 50%`;    /* add 100 to horizontal orientation to emulate -100 to 0 and 0 to 100 */
+            if (isNaN(nextPercentage)) {
+                return;
+            }
             image.animate({
                 objectPosition: `${100 + nextPercentage}% center`
             }, { duration: 3600, fill: "forwards" });
         }
     }
-
-    // not allowing wheel scrolling
-
+    
     // Image switching stuff
     const initialImageSources = [
         "images/colorful-sunset.jpg",
@@ -79,22 +80,58 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
     let isInitialImages = true;
-
-    imageSwitchButton.addEventListener("click", () => {
+    // Function to switch images
+    function switchImages() {
+        const imageTrack = document.getElementById("image-track");
+        const currentImages = imageTrack.getElementsByClassName("image");
+        
         if (isInitialImages) {
-            imageTrack.innerHTML = "";     // clear the existing images in the track
+            // remove current images
+            for (const image of currentImages) {
+                image.remove();
+            }
             // add alternative images to the track
-            alternativeImageSources.forEach((source, index) => {
+            alternativeImageSources.forEach((source) => {
                 const img = document.createElement("img");
                 img.src = source;
                 img.classList.add("image");
                 img.draggable = false;
                 imageTrack.appendChild(img);
             });
-
+    
             isInitialImages = false;    // toggle flag
         } else {    // not initial images
-            window.location.reload();    // reload initial images
+            // reload initial images
+            for (const image of currentImages) {
+                image.remove();
+            }
+
+            initialImageSources.forEach((source) => {
+                const img = document.createElement("img");
+                img.src = source;
+                img.classList.add("image");
+                img.draggable = false;
+                imageTrack.appendChild(img);
+            });
+            isInitialImages = true;
+
+            // Restore shared scrolling position
+            const maxDelta = window.innerWidth / 2;
+            const newPercentage = sharedPercentage;
+            const translateX = (maxDelta * newPercentage) / -100;
+
+            track.style.transition = "none";    // disable animation during transition
+            track.style.transform = `translate(${translateX}px, -50%)`;
+            setTimeout(() => {
+                track.style.transition = "";    // re-enable the animation after transition
+            }, 0);
         }
+    }
+
+    const moobIcon = document.getElementById("moon");
+
+    moobIcon.addEventListener("click", () => {
+        console.log("Moon icon clicked");
+        switchImages();    // call function to switch images
     });
 });
