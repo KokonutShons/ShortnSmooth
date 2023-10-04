@@ -29,11 +29,12 @@ This single-page web application is a lightweight project designed to demonstrat
 
 This project aims to provide an enjoyable experience for users while highlighting the simplicity and elegance of web technologies.
 
+In high quality resolution, the project showcases the artictic craftsmanship of phtographers, taking snapshots of the beautiful world we live in.
 
 ## Features
 * *Smooth Scrolling*: This project offers a seamless and visually appealing scrolling experience, where images smoothly transition left and right as you navigate through the content.
 
-* *User-Friendly Interface*: The project ofucses on providing an intuitive and enjoyable user interface. Users can easily grasp the scrolling and image-switching mechanics without any complex controls.
+* *User-Friendly Interface*: The project foucses on providing an intuitive and enjoyable user interface. Users can easily grasp the scrolling and image-switching mechanics without any complex controls.
 
 * *Vanilla Web Technologies*: The project is built entirely with standard HTML, CSS, and JavaScript, making it lightweight and easy to understand. It showcases the potential of these core web technologies. 
 
