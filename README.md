@@ -93,6 +93,28 @@ This project is licensed unser the MIT License - see the [LICENSE](LICENSE) file
 
 
 ## Acknowledgments
+- Beautiful Pictures!:
+
+  - [Simon Berger](https://unsplash.com/@8moments): landscape photography of mountains
+
+  - [Justin Bisson Beck](https://unsplash.com/@justinbissonbeck): photography of house near body of water
+
+  - [Steve Busch](https://unsplash.com/@sdbusch77): a cluster of stars in the night sky
+
+  - [Ken Cheung](https://unsplash.com/@kencheungphoto): tree on body of water near mountains
+
+  - [Tom Gainor](https://unsplash.com/@its_tgain): landscape photography of body of water overlooking mountain range
+
+  - [Greg Johnson](https://unsplash.com/@tornadogreg): a man standing in a field under a purple and green sky
+
+  - [Adi Kavazovic](https://unsplash.com/@epiccanada): a boat is in the water in front of a city
+
+  - [Robert Lukeman](https://unsplash.com/@robertlukeman): green grass field during sunset
+
+  - [Joshua Sortino](https://unsplash.com/@sortino): waterfalls near cave at daytime
+
+  - [Benjamin Voros](https://unsplash.com/@vorosbenisop): snow mountain under the stars
+
 - Aristide Benoist: original website inspiriation
 
 - Camille Mormal: featured website inspiriation
