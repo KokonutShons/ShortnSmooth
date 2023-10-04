@@ -1,4 +1,4 @@
-# ShortnSmooth
+# UI Feature Showcase
 Super short, light, fun project that showcases some very cool things we can do with vanilla HTML, CSS, and JavaScript for UI!
 
 ![Preview-Screenshot](images/screenshots/demo-screen.png)
@@ -67,12 +67,12 @@ You can use any code editor of your choice as weell.
 3. **Open the HTML File:**
    - Navigate to the unzipped project folder and double-click the `shwifty.html` file.
 
-4. **Start Using ShortnSmooth:**
-   - The project will open in your web browser, and you can start using ShortnSmooth.
+4. **Start Using UI-Feature-Showcase:**
+   - The project will open in your web browser, and you can start using UI-Feature-Showcase.
 
 
 ## Usage
-ShortnSmooth is a simple project designed to demonstrate various UI interactions using HTML, CSS, and JavaScript. To use this project, follow these steps:
+UI-Feature-Showcase is a simple project designed to demonstrate various UI interactions using HTML, CSS, and JavaScript. To use this project, follow these steps:
 
 1. **Open the Project:**
    - Make sure you have the project files on your computer.
