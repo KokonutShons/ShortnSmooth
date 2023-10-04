@@ -85,11 +85,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const imageTrack = document.getElementById("image-track");
         const currentImages = imageTrack.getElementsByClassName("image");
         
+        // Remove all images in the track
+        while (imageTrack.firstChild) {
+            imageTrack.removeChild(imageTrack.firstChild);
+        }
+        
         if (isInitialImages) {
-            // remove current images
-            for (const image of currentImages) {
-                image.remove();
-            }
             // add alternative images to the track
             alternativeImageSources.forEach((source) => {
                 const img = document.createElement("img");
@@ -98,14 +99,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 img.draggable = false;
                 imageTrack.appendChild(img);
             });
-    
+            
             isInitialImages = false;    // toggle flag
         } else {    // not initial images
-            // reload initial images
-            for (const image of currentImages) {
-                image.remove();
-            }
-
+            // Reload initial images
             initialImageSources.forEach((source) => {
                 const img = document.createElement("img");
                 img.src = source;
@@ -114,14 +111,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 imageTrack.appendChild(img);
             });
             isInitialImages = true;
-
-            // Restore shared scrolling position
-            const maxDelta = window.innerWidth / 2;
-            const newPercentage = sharedPercentage;
-            const translateX = (maxDelta * newPercentage) / -100;
-
+            
+            // Reset shared scrolling percentage to 0
+            sharedPercentage = 0;
+            
             track.style.transition = "none";    // disable animation during transition
-            track.style.transform = `translate(${translateX}px, -50%)`;
+            track.style.transform = `translate(0%, -50%)`;
             setTimeout(() => {
                 track.style.transition = "";    // re-enable the animation after transition
             }, 0);
