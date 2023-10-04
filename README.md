@@ -102,4 +102,4 @@ This project is licensed unser the MIT License - see the [LICENSE](LICENSE) file
 
 - Sean Fujiwara  :peach:
 
-[GitHub](#https://github.com/KokonutShons) :black_heart:
+[GitHub](https://github.com/KokonutShons) :black_heart:
