@@ -33,5 +33,5 @@ body {
     right: 0;
     margin-bottom: 69px;
     margin-right: 169px;
-
+    pointer-events: auto;
 }
